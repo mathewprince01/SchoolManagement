@@ -15,11 +15,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+       User::factory()->create([
+            'name' => 'mathew',
+            'email' => 'mathew@gmail.com',
+            'password' => Hash::make('321456'),
+            'role' => 'Admin'
         ]);
+        User::factory()->create([
+            'name' => 'james',
+            'email' => 'james@gmail.com',
+            'password' => Hash::make('321456'),
+            'role' => 'Teacher'
+        ]);
+        User::factory()->create([
+            'name' => 'suvisesh',
+            'email' => 'suvisesh@gmail.com',
+            'password' => Hash::make('321456'),
+            'role' => 'Student'
+        ]);
+        User::factory()->create([
+            'name' => 'luman',
+            'email' => 'luman@gmail.com',
+            'password' => Hash::make('321456'),
+            'role' => 'Student'
+        ]);
+
+        $this->call(DatainputSeeder::class);
+    
     }
 }

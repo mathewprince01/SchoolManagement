@@ -1,123 +1,119 @@
-@extends('Layout.app')
-@section('title', 'stduent Create')
+@extends('layout.app')
+@section('title', 'Student update')
 @section('main')
-    <div class="containner w-80">
+    <div class="container w-50">
         <div class="card mt-3">
-            <div class="card-header bg-warning text-white text-center">
-                <h3>Stduent Edit</h3>
+            <div class="card-header bg-secondary text-center">
+                <h3>Student Update</h3>
             </div>
             <div class="card-body">
-                <form action="student.update" method="POST" enctype="multipart/form-data">
+                <form action="{{route('student.update', $student->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
-
+                    @method('PUT')
                     <div class="mb-2">
-                        <label for="full_name" class="form-label">FUll Name :</label>
-                        <input type="text" id="full_name" class="form-control" value="{{ old('full_name') }}">
+                        <label for="full_name" class="form_label">Full Name: </label>
+                        <input type="text" name="full_name" id="full_name" id="full_name" value="{{old('full_name',$student->full_name)}}" class="form-control">
                         @error('full_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-2">
-                        <label for="roll_number" class="form-label">Roll NUmber :</label>
-                        <input type="text" id="roll_number" class="form-control" value="{{ old('roll_number') }}">
+                        <label for="roll_number" class="form_label"> Roll Number: </label>
+                        <input type="number" name="roll_number" id="roll_number" id="roll_number" value="{{old('roll_number',$student->roll_number)}}" class="form-control">
                         @error('roll_number')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
-
-                    <div class="mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="scl_class_id" class="form-label">Class : </label>
-                                <select name="scl_class_id" id="scl_class_id" class="form-control">
-                                    <option value="">select</option>
-                                    {{-- @foreach ($classs as $id => $class)
-                                        <option value="{{ $id }}" @Selected(old('scl_class_id') == $id)>{{ $class }}
-                                        </option>
-                                    @endforeach --}}
-                                </select>
-                                @error('scl_class_id')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-4">
-                                <label for="section_id" class="form-label">Section :</label>
-                                <select name="section_id" id="section" class="form-control">
-                                    <option value="">select</option>
-                                    {{-- @foreach ($sections as $id => $section)
-                                        <option value="{{ $id }}" @selected(old('section_id') == $id)>{{ $section }}
-                                        </option>
-                                    @endforeach --}}
-                                </select>
-                                @error('section_id')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="scl_class_id" class="form-label">Class: </label>
+                            <select name="scl_class_id" id="scl_class_id" class="form-select">
+                                <option value="">--Select Class--</option>
+                                @foreach ($classess as $id=>$class)
+                                    <option value="{{$id}}" @selected(old('scl_class_id',$student->scl_class_id) == $id)>{{$class}}</option>
+                                @endforeach
+                            </select>
+                            @error('scl_class_id')
+                                <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label for="section_id" class="form-label">Section: </label>
+                            <select name="section_id" id="section_id" class="form-select">
+                                <option value="">--Select Section--</option>
+                                @foreach ($sections as $id=>$section)
+                                    <option value="{{$id}}" @selected(old('section_id',$student->section_id) == $id)>{{$section}}</option>
+                                @endforeach
+                            </select>
+                            @error('section_id')
+                                <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <label for="gender" class="form-label">Gender</label>
-                        <select name="gender" id="gender" class="form-control">
-                            <option value="">Gender select</option>
-                            {{-- @foreach ($genders as $id => $gender)
-                                <option value="{{ $id }}"@selected(old('gender') == $id)>{{ $gender }}
-                                </option>
-                            @endforeach --}}
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender: </label>
+                        <select name="gender" id="gender" class="form-select">
+                            <option value="">--Select Gender--</option>
+                            @foreach ($genders as $gender)
+                                <option value="{{$gender}}" @selected(old('gender',$student->gender) == $gender)>{{$gender}}</option>
+                            @endforeach
                         </select>
-                    </div>
-                    <div class="mb-2">
-                        <label for="date_of_birth" class="form-label">Date Of Birth</label>
-                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{old('date_of_birth')}}">
-                          @error('date_of_birth')
-                              <div class="alert alert-danger">{{$message}}</div>
-                          @enderror
-                    </div>
-                    <div class="mb-2">
-                        <label for="contact_number">Contact Number</label>
-                        <input type="number" class="form-control" id="contact_number" name="contact_number" value="{{old('contact_number')}}">
-                        @error('contact_number')
-                            <div class="alert alert-danger">{{$message}}</div>
+                        @error('gender')
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="mb-2">
-                            <label for="email" class="form-label">Student Email</label>
-                            <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control">
-                            @error('email')
-                                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="date_of_birth" class="form_label"> Date Of Birth: </label>
+                            <input type="date" name="date_of_birth" id="date_of_birth" id="date_of_birth" value="{{old('date_of_birth',$student->date_of_birth)}}" class="form-control">
+                            @error('date_of_birth')
+                                <div class="text-danger">{{$message}}</div>
                             @enderror
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label for="contact_number" class="form_label"> Contact Number: </label>
+                            <input type="number" name="contact_number" id="contact_number" id="contact_number" value="{{old('contact_number',$student->contact_number)}}" class="form-control">
+                            @error('contact_number')
+                                <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
                     </div>
-
                     <div class="mb-2">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" id="address" name="address" value="{{old('address')}}" class="form-control">
+                        <label for="email" class="form_label">Student Email: </label>
+                        <input type="text" name="email" id="email" id="email" value="{{old('email')}}" class="form-control">
+                        @error('email')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address: </label>
+                        <textarea name="address" id="address" rows="3" class="form-control">{{old('address',$student->address)}}</textarea>
                         @error('address')
-                            <div class="alert alert-danger">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
-                        <div class="mb-2">
-                            <label for="partent_name" class="form-label">Partent Name</label>
-                            <input type="text" id="partent_name" name="partent_name"  value="{{old('partent_name')}}" class="form-control">
-                                @error('partent_name')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                        </div>
-                        <div class="mb-2">
-                            <label for="partent_contact" class="form-label">Partent Contact</label>
-                            <input type="number" id="partent_number" name="partent_number" value="{{old('partent_contact')}}" class="form-control">
-                            @error('partent_contact')
-                                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="parent_name" class="form_label">Parent Name: </label>
+                            <input type="text" name="parent_name" id="parent_name" id="parent_name" value="{{old('parent_name',$student->parent_name)}}" class="form-control">
+                            @error('parent_name')
+                                <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-
-                        <div class="text-center mb-2 ">
-                            <br>
-                            <button class="btn btn-warning">Update</button>
+                        <div class="col-4 mb-3">
+                            <label for="parent_contact" class="form_label">Parent Contact: </label>
+                            <input type="text" name="parent_contact" id="parent_contact" id="parent_contact" value="{{old('parent_contact',$student->parent_contact)}}" class="form-control">
+                            @error('parent_contact')
+                                <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary">Update</button>
+                    </div>
                 </form>
-
             </div>
         </div>
-
     </div>
 @endsection
+
