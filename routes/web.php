@@ -16,7 +16,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth', 'role:Admin,Teacher,Student')->group(function(){
     Route::resource('student', StudentController::class);
     Route::resource('teacher', TeacherController::class);
-
     Route::get('timetable_index', [TimetableController::class, 'index'])->name('timetable_index');
     Route::get('marks_list', [MarkController::class, 'index'])->name('marks_list');
     Route::get('student_pdf', [StudentController::class, 'studentPdf'])->name('student_pdf');
@@ -24,11 +23,14 @@ Route::middleware('auth', 'role:Admin,Teacher,Student')->group(function(){
 
 });
 
+//teacher only visible=> mark create marks store
+
 Route::middleware('auth', 'role:Teacher')->group(function(){
     Route::get('marks_create', [MarkController::class, 'create'])->name('marks_create');
     Route::post('marks_store', [MarkController::class, 'store'])->name('marks_store');
 });
 
+//admin route admin only access componen
 Route::middleware('auth', 'role:Admin')->group(function(){
     Route::get('timetable_create', [TimetableController::class, 'create'])->name('timetable_create');
     Route::post('timetable_store', [TimetableController::class , 'store'])->name('timetable_store');

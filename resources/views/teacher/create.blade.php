@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('Layout.app')
 @section('title', 'Teacher Register')
 @section('main')
     <div class="container w-50">

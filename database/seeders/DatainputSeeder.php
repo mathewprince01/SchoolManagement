@@ -49,6 +49,10 @@ class DatainputSeeder extends Seeder
         DB::table('exams')->insert(['exam_name' => 'Mid-term ','exam_date' => '2025-11-19']);
         DB::table('exams')->insert(['exam_name' => 'Mid-term ','exam_date' => '2025-11-20']);
 
-
+        DB::table('exams')->insert(['exam_name'=>'Final','exam_date'=>'2025-12-01']);
+        DB::table('exams')->insert(['exam_name'=>'Final','exam_date'=>'2025-12-02']);
+        DB::table('exams')->insert(['exam_name'=>'Final','exam_date'=>'2025-12-03']);
+        DB::table('exams')->insert(['exam_name'=>'final','exam_date'=>'2025-12-04']);
     }
 }
+

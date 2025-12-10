@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('Layout.app')
 @section('title', 'Student List')
 @section('main')
     <x-LogoutComponent/>

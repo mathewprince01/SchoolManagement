@@ -2,8 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Mark;
-use App\Models\Student;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,16 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ResultMail extends Mailable
+class SendResultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mark;
-    public $student;
-    public function __construct(Mark $mark, Student $student)
+    /**
+     * Create a new message instance.
+     */
+    public function __construct()
     {
-         $this->mark = $mark;
-         $this->student = $student;
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class ResultMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Result Mail',
+            subject: 'Send Result Mail',
         );
     }
 
@@ -39,9 +37,7 @@ class ResultMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'email.resultmail',
-            with: ['mark'    => $this->mark,
-                   'student' => $this->student]
+            view: 'view.name',
         );
     }
 

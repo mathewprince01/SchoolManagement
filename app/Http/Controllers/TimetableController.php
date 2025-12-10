@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassTimetable;
 use App\Models\Subject;
 use App\Models\Teacher;
-use App\Models\TimeTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class TimetableController extends Controller
 {
     public function index()
     {
-        $timetables = TimeTable::with('subject')->get();
+        $timetables = ClassTimetable::with('subject')->get();
         return view('timetable.list', compact('timetables'));
     }
 
@@ -31,7 +31,7 @@ class TimetableController extends Controller
             'teacher'    => 'required'
         ]);
         $timetable = collect($validdata)->toArray();
-        TimeTable::create($timetable);
+        ClassTimetable::create($timetable);
         return redirect()->route('timetable_index')->with('success', 'Timetable Created Successfully');
 
     }

@@ -1,39 +1,47 @@
-<nav class="navbar navbar-expand-lg bg-danger" data-bs-theme="dark">
-  <div class="container-fluid">
-    <div class="row-10">
-    <a class="navbar-brand text-light" href="#">SchoolManagement</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item me-10">
-          {{-- <a href="{{ route('event.index') }}" class="nav-link text-light">Events</a> --}}
-        </li>
-        <li class="nav-item me-10">
-          {{-- <a href="{{ route('purchaseCreate') }}" class="nav-link text-light">Ticket Purchase</a> --}}
-        </li>
-
-        <li class="nav-item dropdown me-10">
-          <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            More
-          </a>
-          <ul class="dropdown-menu">
-            {{-- <li><a class="dropdown-item" href="{{ route('event.index') }}">Events</a></li>
-            <li><a class="dropdown-item" href="{{ route('purchaseCreate') }}">Ticket Purchase</a></li> --}}
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item btn btn-danger text-white" href="/logout">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-   </div>
-  </div>
-</nav>
+<header>
+    <nav class="navbar bg-danger p-2">
+        <h2 class="navbar-brand text-bg-danger ps-1">School Management System</h2>
+        <ul class="nav p-3">
+            <li class="nav-item">
+                <a href="{{route('student.index')}}" class="nav-link text-white">Students</a>
+            </li>
+            @if (auth()->user()->role == 'Student' || auth()->user()->role == 'Admin')
+                <li class="nav-item">
+                    <a href="{{route('student.create')}}" class="nav-link text-white">Student register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('marks_list')}}" class="nav-link text-white">Result</a>
+                </li>
+            @endif
+            @if (auth()->user()->role == 'Teacher' || auth()->user()->role == 'Admin')
+                <li class="nav-item">
+                    <a href="{{route('teacher.index')}}" class="nav-link text-white">Teachers</a>
+                </li>
+            @endif
+            @if (auth()->user()->role == 'Teacher')
+                <li class="nav-item">
+                    <a href="{{route('marks_create')}}" class="nav-link text-white">Mark Entry</a>
+                </li>
+            @endif
+            @if (auth()->user()->role == 'Teacher' || auth()->user()->role == 'Student')
+                <li class="nav-item">
+                    <a href="{{route('timetable_index')}}" class="nav-link text-white">Time Table</a>
+                </li>
+            @endif
+            @if (auth()->user()->role == 'Admin')
+                <li class="nav-item">
+                    <a href="{{route('teacher.create')}}" class="nav-link text-white">Teachers Entry</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('timetable_create')}}" class="nav-link text-white">Time Table</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('mark_summary')}}" class="nav-link text-white">Mark Summary</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('top_performer')}}" class="nav-link text-white">Top Performer</a>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</header>

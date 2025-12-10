@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('Layout.app')
 @section('title', 'Timetable list')
 @section('main')
     <div class="container">

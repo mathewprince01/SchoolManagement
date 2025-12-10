@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('Layout.app')
 @section('title', 'Student Register')
 @section('main')
     <div class="container w-80">
@@ -8,7 +8,7 @@
             </div>
 
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{route('student.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2">
                         <label for="full_name" class="form_label">Full Name: </label>
@@ -29,9 +29,9 @@
                             <label for="scl_class_id" class="form-label">Class: </label>
                             <select name="scl_class_id" id="scl_class_id" class="form-select">
                                 <option value="">--Select Class--</option>
-                                {{-- @foreach ($classess as $id=>$class)
+                                @foreach ($classess as $id=>$class)
                                     <option value="{{$id}}" @selected(old('scl_class_id') == $id)>{{$class}}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             @error('scl_class_id')
                                 <div class="text-danger">{{$message}}</div>
@@ -41,9 +41,9 @@
                             <label for="section_id" class="form-label">Section: </label>
                             <select name="section_id" id="section_id" class="form-select">
                                 <option value="">--Select Section--</option>
-                                {{-- @foreach ($sections as $id=>$section)
+                                @foreach ($sections as $id=>$section)
                                     <option value="{{$id}}" @selected(old('section_id') == $id)>{{$section}}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             @error('section_id')
                                 <div class="text-danger">{{$message}}</div>
@@ -54,9 +54,9 @@
                         <label for="gender" class="form-label">Gender: </label>
                         <select name="gender" id="gender" class="form-select">
                             <option value="">--Select Gender--</option>
-                            {{-- @foreach ($genders as $gender)
+                            @foreach ($genders as $gender)
                                 <option value="{{$gender}}" @selected(old('gender') == $gender)>{{$gender}}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         @error('gender')
                             <div class="text-danger">{{$message}}</div>

@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Subject;
-use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_timetables', function (Blueprint $table) {
-
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('day');
-            $table->integer('period');
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->string('teacher_id')->unique();
+            $table->string('full_name',100);
             $table->foreignIdFor(Subject::class)->constrained()->cascadeOnDelete();
-            $table->string('teacher',100);
+            $table->text('qualification')->nullable();
+            $table->string('contact',10);
+            $table->string('email')->unique();
+            $table->string('assigned_classes');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_timetables');
+        Schema::dropIfExists('teachers');
     }
 };

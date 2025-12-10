@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('Layout.app')
 @section('title', 'Marks Entry')
 @section('main')
     <div class="container">

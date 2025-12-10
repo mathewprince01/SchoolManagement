@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Exports\MarkSummary;
+use App\Exports\MarkSummaryExport;
 use App\Exports\TopPerformer;
+use App\Exports\TopPerformerExport;
 use App\Jobs\SendResultMail;
 use App\Models\Exam;
 use App\Models\Mark;

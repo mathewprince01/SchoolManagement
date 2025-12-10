@@ -12,7 +12,7 @@ class Student extends Model
     }
 
     public function sclclass(){
-        return $this->belongsTo(SclClasse::class, 'scl_class_id');
+        return $this->belongsTo(SclClass::class, 'scl_class_id');
     }
     public function section(){
         return $this->belongsTo(Section::class);

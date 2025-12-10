@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\SclClasse;
+use App\Models\SclClass;
 use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('student_id')->unique();
             $table->string('full_name',100);
             $table->bigInteger('roll_number')->unique();
-            $table->foreignIdFor(SclClasse::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SclClass::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Section::class)->constrained()->cascadeOnDelete();
             $table->string('gender');
             $table->date('date_of_birth');
@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('parent_contact',10);
             $table->timestamps();
         });
+
+
     }
 
     /**
