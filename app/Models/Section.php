@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-     public function student(){
+      protected $fillable = ['name'];
+    public function student(){
         return $this->hasMany(Section::class);
     }
 }
